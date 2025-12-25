@@ -2,9 +2,12 @@ package metier;
 
 import dao.ClientDAO;
 import dao.CompteBancaireDAO;
+import dao.TransfertDAO;
 import modele.Client;
 import modele.CompteBancaire;
+import modele.Transfert;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,10 +18,12 @@ public class TraitementImpl implements ITraitement {
     
     private ClientDAO clientDAO;
     private CompteBancaireDAO compteBancaireDAO;
-
+    private TransfertDAO transfertDAO;
+    
     public TraitementImpl() {
         this.clientDAO = new ClientDAO();
         this.compteBancaireDAO = new CompteBancaireDAO();
+        this.transfertDAO = new TransfertDAO();
     }
 
     // ===== CLIENT =====
@@ -90,6 +95,10 @@ public class TraitementImpl implements ITraitement {
         if (!source.isActif() || !dest.isActif()) return false;
         if (source.getSolde() < somme) return false;
 
+        // Sauvegarder les soldes avant le transfert
+        double soldeSourceAvant = source.getSolde();
+        double soldeDestAvant = dest.getSolde();
+        
         double soldeSource = source.getSolde() - somme;
         double soldeDest = dest.getSolde() + somme;
 
@@ -97,8 +106,23 @@ public class TraitementImpl implements ITraitement {
         boolean ok2 = compteBancaireDAO.modifierSolde(dest.getId(), soldeDest);
 
         if (ok1 && ok2) {
+            // Mettre à jour les objets en mémoire
             source.setSolde(soldeSource);
             dest.setSolde(soldeDest);
+            
+            // Enregistrer le transfert dans la base de données
+            Transfert transfert = new Transfert();
+            transfert.setCompteSource(source);
+            transfert.setCompteDestination(dest);
+            transfert.setMontant(somme);
+            transfert.setDateTransfert(new Date());
+            transfert.setSoldeSourceAvant(soldeSourceAvant);
+            transfert.setSoldeSourceApres(soldeSource);
+            transfert.setSoldeDestAvant(soldeDestAvant);
+            transfert.setSoldeDestApres(soldeDest);
+            
+            transfertDAO.ajouter(transfert);
+            
             return true;
         }
         return false;
