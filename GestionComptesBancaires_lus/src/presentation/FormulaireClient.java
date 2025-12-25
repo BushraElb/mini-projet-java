@@ -14,7 +14,6 @@ import java.awt.event.ActionListener;
 public class FormulaireClient extends JDialog {
     
     private ITraitement traitement;
-    private FenetrePrincipale fenetrePrincipale;
     
     private JTextField txtNom;
     private JTextField txtPrenom;
@@ -22,9 +21,13 @@ public class FormulaireClient extends JDialog {
     private JButton btnValider;
     private JButton btnAnnuler;
     
-    public FormulaireClient(FenetrePrincipale parent, ITraitement traitement) {
-        super(parent, "Ajouter un client", true);
-        this.fenetrePrincipale = parent;
+    /**
+     * Constructeur pour créer un formulaire client
+     * @param parent Le composant parent (JFrame ou JDialog)
+     * @param traitement L'interface de traitement métier
+     */
+    public FormulaireClient(Component parent, ITraitement traitement) {
+        super(SwingUtilities.getWindowAncestor(parent), "Ajouter un client", ModalityType.APPLICATION_MODAL);
         this.traitement = traitement;
         
         initialiserInterface();

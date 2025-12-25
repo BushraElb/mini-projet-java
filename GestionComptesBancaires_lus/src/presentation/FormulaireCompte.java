@@ -88,20 +88,20 @@ public class FormulaireCompte extends JDialog {
         comboClient = new JComboBox<>();
         panelChamps.add(comboClient, gbc);
         
-        // Bouton pour rafraîchir la liste des clients
+        // Bouton pour créer un nouveau client
         gbc.gridx = 2;
         gbc.fill = GridBagConstraints.NONE;
         gbc.weightx = 0;
-        JButton btnRafraichirClients = new JButton("🔄");
-        btnRafraichirClients.setToolTipText("Rafraîchir la liste des clients");
-        btnRafraichirClients.setPreferredSize(new Dimension(30, 25));
-        btnRafraichirClients.addActionListener(new ActionListener() {
+        JButton btnNouveauClient = new JButton("+ Nouveau");
+        btnNouveauClient.setToolTipText("Créer un nouveau client");
+        btnNouveauClient.setPreferredSize(new Dimension(100, 25));
+        btnNouveauClient.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                chargerClients();
+                creerNouveauClient();
             }
         });
-        panelChamps.add(btnRafraichirClients, gbc);
+        panelChamps.add(btnNouveauClient, gbc);
         
         // Solde
         gbc.gridx = 0;
@@ -157,6 +157,22 @@ public class FormulaireCompte extends JDialog {
         panelPrincipal.add(panelBoutons, BorderLayout.SOUTH);
         
         add(panelPrincipal);
+    }
+    
+    /**
+     * Crée un nouveau client et l'ajoute à la liste
+     */
+    private void creerNouveauClient() {
+        FormulaireClient formulaireClient = new FormulaireClient(this, traitement);
+        formulaireClient.setVisible(true);
+        
+        // Après la fermeture du formulaire, rafraîchir la liste et sélectionner le nouveau client
+        chargerClients();
+        
+        // Sélectionner le dernier client ajouté (le plus récent)
+        if (comboClient.getItemCount() > 0) {
+            comboClient.setSelectedIndex(comboClient.getItemCount() - 1);
+        }
     }
     
     /**

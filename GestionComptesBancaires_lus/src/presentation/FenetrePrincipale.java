@@ -23,8 +23,6 @@ public class FenetrePrincipale extends JFrame {
     private JButton btnAjouter;
     private JButton btnModifier;
     private JButton btnSupprimer;
-    private JButton btnActualiser;
-    private JButton btnAjouterClient;
     
     public FenetrePrincipale() {
         traitement = new TraitementImpl();
@@ -105,30 +103,9 @@ public class FenetrePrincipale extends JFrame {
             }
         });
         
-        btnActualiser = new JButton("Actualiser");
-        btnActualiser.setPreferredSize(new Dimension(120, 35));
-        btnActualiser.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                chargerComptes();
-            }
-        });
-        
-        btnAjouterClient = new JButton("Ajouter Client");
-        btnAjouterClient.setPreferredSize(new Dimension(120, 35));
-        btnAjouterClient.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                FormulaireClient formulaireClient = new FormulaireClient(FenetrePrincipale.this, traitement);
-                formulaireClient.setVisible(true);
-            }
-        });
-        
         panelBoutons.add(btnAjouter);
         panelBoutons.add(btnModifier);
         panelBoutons.add(btnSupprimer);
-        panelBoutons.add(btnActualiser);
-        panelBoutons.add(btnAjouterClient);
         
         panelPrincipal.add(panelBoutons, BorderLayout.SOUTH);
         
