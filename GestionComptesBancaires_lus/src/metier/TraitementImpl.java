@@ -121,4 +121,47 @@ public class TraitementImpl implements ITraitement {
     public List<CompteBancaire> getComptes() {
         return compteBancaireDAO.getAll();
     }
+<<<<<<< HEAD
+=======
+    
+    /**
+     * Méthode supplémentaire pour supprimer un compte bancaire
+     * @param id L'ID du compte à supprimer
+     * @return true si la suppression est réussie
+     */
+    @Override
+    public boolean supprimerCompte(long id) {
+        if (id > 0) {
+            return compteBancaireDAO.supprimer(id);
+        }
+        return false;
+    }
+    
+    /**
+     * Méthode supplémentaire pour récupérer un compte par son ID
+     * @param id L'ID du compte
+     * @return Le compte trouvé ou null
+     */
+    @Override
+    public CompteBancaire getCompteById(long id) {
+        if (id > 0) {
+            return compteBancaireDAO.getById(id);
+        }
+        return null;
+    }
+    
+    /**
+     * Méthode supplémentaire pour modifier le solde d'un compte
+     * @param id L'ID du compte
+     * @param nouveauSolde Le nouveau solde
+     * @return true si la modification est réussie
+     */
+    @Override
+    public boolean modifierSolde(long id, double nouveauSolde) {
+        if (id > 0 && nouveauSolde >= 0) {
+            return compteBancaireDAO.modifierSolde(id, nouveauSolde);
+        }
+        return false;
+    }
+>>>>>>> 8c8b1efcbe235eb8291281109aa9b2ff6240da92
 }

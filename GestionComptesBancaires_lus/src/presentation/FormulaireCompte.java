@@ -235,9 +235,9 @@ public class FormulaireCompte extends JDialog {
                 JOptionPane.INFORMATION_MESSAGE);
         } else {
             // Modification d'un compte existant
-            ((TraitementImpl) traitement).modifierCompte(compteModifie.getId(), checkActif.isSelected());
+            traitement.modifierCompte(compteModifie.getId(), checkActif.isSelected());
             // Mettre à jour le solde
-            ((TraitementImpl) traitement).modifierSolde(compteModifie.getId(), solde);
+            traitement.modifierSolde(compteModifie.getId(), solde);
             
             JOptionPane.showMessageDialog(this,
                 "Compte modifié avec succès.",

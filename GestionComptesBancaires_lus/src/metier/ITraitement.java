@@ -24,5 +24,10 @@ public interface ITraitement {
     CompteBancaire getCompte(int id_client, String rib);
     List<CompteBancaire> getComptes(int id_client);
     List<CompteBancaire> getComptes();
+    
+    // Méthodes supplémentaires pour la gestion des comptes
+    CompteBancaire getCompteById(long id);
+    boolean supprimerCompte(long id);
+    boolean modifierSolde(long id, double nouveauSolde);
 
 }
