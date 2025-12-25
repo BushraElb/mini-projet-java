@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class TraitementImpl implements ITraitement {
     
+    
     private ClientDAO clientDAO;
     private CompteBancaireDAO compteBancaireDAO;
     

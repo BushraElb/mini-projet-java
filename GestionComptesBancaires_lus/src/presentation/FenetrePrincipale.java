@@ -1,6 +1,7 @@
 package presentation;
 
 import metier.ITraitement;
+import metier.TraitementImpl;
 import modele.CompteBancaire;
 
 import javax.swing.*;
