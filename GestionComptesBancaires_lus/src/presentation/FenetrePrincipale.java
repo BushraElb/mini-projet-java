@@ -21,6 +21,7 @@ public class FenetrePrincipale extends JFrame {
     private JButton btnAjouter;
     private JButton btnModifier;
     private JButton btnSupprimer;
+    private JButton btnTransfert;
     
     public FenetrePrincipale() {
         traitement = new TraitementImpl();
@@ -99,9 +100,19 @@ public class FenetrePrincipale extends JFrame {
             }
         });
         
+        btnTransfert = new JButton("Transfert");
+        btnTransfert.setPreferredSize(new Dimension(120, 35));
+        btnTransfert.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ouvrirFormulaireTransfert();
+            }
+        });
+        
         panelBoutons.add(btnAjouter);
         panelBoutons.add(btnModifier);
         panelBoutons.add(btnSupprimer);
+        panelBoutons.add(btnTransfert);
         
         panelPrincipal.add(panelBoutons, BorderLayout.SOUTH);
         
@@ -192,6 +203,17 @@ public class FenetrePrincipale extends JFrame {
     }
     
 
+    /**
+     * Ouvre le formulaire de transfert
+     */
+    private void ouvrirFormulaireTransfert() {
+        FormulaireTransfert formulaire = new FormulaireTransfert(this, traitement);
+        formulaire.setVisible(true);
+    }
+    
+    /**
+     * Méthode appelée après l'ajout ou la modification d'un compte
+     */
     public void actualiserTable() {
         chargerComptes();
     }
