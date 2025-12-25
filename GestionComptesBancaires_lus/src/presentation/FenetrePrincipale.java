@@ -1,7 +1,6 @@
 package presentation;
 
 import metier.ITraitement;
-import metier.TraitementImpl;
 import modele.CompteBancaire;
 
 import javax.swing.*;
@@ -179,7 +178,7 @@ public class FenetrePrincipale extends JFrame {
         }
         
         long idCompte = (Long) modelTable.getValueAt(ligneSelectionnee, 0);
-        CompteBancaire compte = ((TraitementImpl) traitement).getCompteById(idCompte);
+        CompteBancaire compte = traitement.getCompteById(idCompte);
         
         if (compte != null) {
             FormulaireCompte formulaire = new FormulaireCompte(this, traitement, compte);
@@ -210,7 +209,7 @@ public class FenetrePrincipale extends JFrame {
             JOptionPane.QUESTION_MESSAGE);
         
         if (confirmation == JOptionPane.YES_OPTION) {
-            boolean success = ((TraitementImpl) traitement).supprimerCompte(idCompte);
+            boolean success = traitement.supprimerCompte(idCompte);
             if (success) {
                 JOptionPane.showMessageDialog(this,
                     "Compte supprimé avec succès.",

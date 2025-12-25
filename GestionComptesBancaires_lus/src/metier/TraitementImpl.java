@@ -133,6 +133,7 @@ public class TraitementImpl implements ITraitement {
      * @param id L'ID du compte à supprimer
      * @return true si la suppression est réussie
      */
+    @Override
     public boolean supprimerCompte(long id) {
         if (id > 0) {
             return compteBancaireDAO.supprimer(id);
@@ -145,6 +146,7 @@ public class TraitementImpl implements ITraitement {
      * @param id L'ID du compte
      * @return Le compte trouvé ou null
      */
+    @Override
     public CompteBancaire getCompteById(long id) {
         if (id > 0) {
             return compteBancaireDAO.getById(id);
@@ -158,6 +160,7 @@ public class TraitementImpl implements ITraitement {
      * @param nouveauSolde Le nouveau solde
      * @return true si la modification est réussie
      */
+    @Override
     public boolean modifierSolde(long id, double nouveauSolde) {
         if (id > 0 && nouveauSolde >= 0) {
             return compteBancaireDAO.modifierSolde(id, nouveauSolde);
