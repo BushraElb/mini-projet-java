@@ -1,19 +1,11 @@
--- ============================================
--- Script SQL pour la création de la base de données
--- Application de Gestion des Comptes Bancaires
--- ============================================
+-- Création de la base de données
 
--- Créer la base de données (si elle n'existe pas)
 CREATE DATABASE IF NOT EXISTS gestion_comptes_bancaires
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_unicode_ci;
 
--- Utiliser la base de données
 USE gestion_comptes_bancaires;
 
--- ============================================
--- Table : client
--- ============================================
 CREATE TABLE IF NOT EXISTS client (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
@@ -23,9 +15,7 @@ CREATE TABLE IF NOT EXISTS client (
     INDEX idx_prenom (prenom)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================
--- Table : compte_bancaire
--- ============================================
+
 CREATE TABLE IF NOT EXISTS compte_bancaire (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     rib VARCHAR(50) NOT NULL UNIQUE,
@@ -39,18 +29,14 @@ CREATE TABLE IF NOT EXISTS compte_bancaire (
     INDEX idx_actif (actif)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================
--- Données de test (optionnel)
--- ============================================
 
--- Insérer quelques clients de test
 INSERT INTO client (nom, prenom, telephone) VALUES
 ('ELBADAOUI', 'Bouchra', '0612345678'),
 ('ALAMI', 'Ahmed', '0623456789'),
 ('BENNANI', 'Fatima', '0634567890'),
 ('CHAKIR', 'Mohammed', '0645678901');
 
--- Insérer quelques comptes bancaires de test
+
 INSERT INTO compte_bancaire (rib, solde, datecreation, actif, id_client) VALUES
 ('RIB001234567890123456789012', 5000.00, CURDATE(), TRUE, 1),
 ('RIB002345678901234567890123', 12000.50, CURDATE(), TRUE, 1),
@@ -58,9 +44,7 @@ INSERT INTO compte_bancaire (rib, solde, datecreation, actif, id_client) VALUES
 ('RIB004567890123456789012345', 3000.00, CURDATE(), FALSE, 3),
 ('RIB005678901234567890123456', 15000.75, CURDATE(), TRUE, 4);
 
--- ============================================
--- Vérification des données
--- ============================================
+
 SELECT 'Clients insérés :' AS '';
 SELECT * FROM client;
 

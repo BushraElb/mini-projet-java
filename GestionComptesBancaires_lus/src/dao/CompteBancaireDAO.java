@@ -7,16 +7,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Classe DAO pour les opérations CRUD sur la table CompteBancaire
- */
+
 public class CompteBancaireDAO {
-    
-    /**
-     * Ajoute un nouveau compte bancaire dans la base de données
-     * @param compte Le compte à ajouter
-     * @return true si l'ajout est réussi, false sinon
-     */
+
     public boolean ajouter(CompteBancaire compte) {
         String sql = "INSERT INTO compte_bancaire (rib, solde, datecreation, actif, id_client) VALUES (?, ?, ?, ?, ?)";
         
@@ -43,13 +36,7 @@ public class CompteBancaireDAO {
         }
         return false;
     }
-    
-    /**
-     * Met à jour l'état (actif/inactif) d'un compte bancaire
-     * @param id L'ID du compte
-     * @param actif L'état du compte
-     * @return true si la modification est réussie, false sinon
-     */
+
     public boolean modifierEtat(long id, boolean actif) {
         String sql = "UPDATE compte_bancaire SET actif = ? WHERE id = ?";
         
@@ -65,13 +52,7 @@ public class CompteBancaireDAO {
         }
         return false;
     }
-    
-    /**
-     * Met à jour le solde d'un compte bancaire
-     * @param id L'ID du compte
-     * @param nouveauSolde Le nouveau solde
-     * @return true si la modification est réussie, false sinon
-     */
+
     public boolean modifierSolde(long id, double nouveauSolde) {
         String sql = "UPDATE compte_bancaire SET solde = ? WHERE id = ?";
         
@@ -87,12 +68,7 @@ public class CompteBancaireDAO {
         }
         return false;
     }
-    
-    /**
-     * Supprime un compte bancaire par son ID
-     * @param id L'ID du compte à supprimer
-     * @return true si la suppression est réussie, false sinon
-     */
+
     public boolean supprimer(long id) {
         String sql = "DELETE FROM compte_bancaire WHERE id = ?";
         
@@ -106,12 +82,7 @@ public class CompteBancaireDAO {
         }
         return false;
     }
-    
-    /**
-     * Récupère un compte bancaire par son ID
-     * @param id L'ID du compte
-     * @return Le compte trouvé ou null
-     */
+
     public CompteBancaire getById(long id) {
         String sql = "SELECT cb.*, c.id as client_id, c.nom, c.prenom, c.telephone " +
                      "FROM compte_bancaire cb " +
@@ -132,13 +103,7 @@ public class CompteBancaireDAO {
         }
         return null;
     }
-    
-    /**
-     * Récupère un compte bancaire par l'ID du client et le RIB
-     * @param idClient L'ID du client
-     * @param rib Le RIB du compte
-     * @return Le compte trouvé ou null
-     */
+
     public CompteBancaire getByClientIdAndRIB(int idClient, String rib) {
         String sql = "SELECT cb.*, c.id as client_id, c.nom, c.prenom, c.telephone " +
                      "FROM compte_bancaire cb " +
@@ -160,12 +125,7 @@ public class CompteBancaireDAO {
         }
         return null;
     }
-    
-    /**
-     * Récupère tous les comptes bancaires d'un client
-     * @param idClient L'ID du client
-     * @return Liste des comptes du client
-     */
+
     public List<CompteBancaire> getByClientId(int idClient) {
         List<CompteBancaire> comptes = new ArrayList<>();
         String sql = "SELECT cb.*, c.id as client_id, c.nom, c.prenom, c.telephone " +
@@ -187,11 +147,7 @@ public class CompteBancaireDAO {
         }
         return comptes;
     }
-    
-    /**
-     * Récupère tous les comptes bancaires
-     * @return Liste de tous les comptes
-     */
+
     public List<CompteBancaire> getAll() {
         List<CompteBancaire> comptes = new ArrayList<>();
         String sql = "SELECT cb.*, c.id as client_id, c.nom, c.prenom, c.telephone " +
@@ -211,13 +167,7 @@ public class CompteBancaireDAO {
         }
         return comptes;
     }
-    
-    /**
-     * Mappe un ResultSet vers un objet CompteBancaire
-     * @param rs Le ResultSet
-     * @return Un objet CompteBancaire
-     * @throws SQLException en cas d'erreur SQL
-     */
+
     private CompteBancaire mapResultSetToCompte(ResultSet rs) throws SQLException {
         CompteBancaire compte = new CompteBancaire();
         compte.setId(rs.getLong("id"));

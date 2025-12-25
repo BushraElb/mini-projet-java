@@ -12,9 +12,7 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-/**
- * Fenêtre principale de l'application de gestion des comptes bancaires
- */
+
 public class FenetrePrincipale extends JFrame {
     
     private ITraitement traitement;
@@ -30,9 +28,7 @@ public class FenetrePrincipale extends JFrame {
         chargerComptes();
     }
     
-    /**
-     * Initialise l'interface graphique
-     */
+
     private void initialiserInterface() {
         setTitle("Gestion des Comptes Bancaires");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -112,9 +108,7 @@ public class FenetrePrincipale extends JFrame {
         add(panelPrincipal);
     }
     
-    /**
-     * Charge tous les comptes dans la table
-     */
+
     private void chargerComptes() {
         modelTable.setRowCount(0); // Vider la table
         
@@ -134,17 +128,13 @@ public class FenetrePrincipale extends JFrame {
         }
     }
     
-    /**
-     * Ouvre le formulaire d'ajout d'un compte
-     */
+
     private void ouvrirFormulaireAjout() {
         FormulaireCompte formulaire = new FormulaireCompte(this, traitement, null);
         formulaire.setVisible(true);
     }
     
-    /**
-     * Modifie le compte sélectionné
-     */
+
     private void modifierCompteSelectionne() {
         int ligneSelectionnee = tableComptes.getSelectedRow();
         if (ligneSelectionnee == -1) {
@@ -164,9 +154,7 @@ public class FenetrePrincipale extends JFrame {
         }
     }
     
-    /**
-     * Supprime le compte sélectionné
-     */
+
     private void supprimerCompteSelectionne() {
         int ligneSelectionnee = tableComptes.getSelectedRow();
         if (ligneSelectionnee == -1) {
@@ -203,9 +191,7 @@ public class FenetrePrincipale extends JFrame {
         }
     }
     
-    /**
-     * Méthode appelée après l'ajout ou la modification d'un compte
-     */
+
     public void actualiserTable() {
         chargerComptes();
     }

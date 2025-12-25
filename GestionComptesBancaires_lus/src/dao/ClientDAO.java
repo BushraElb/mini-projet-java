@@ -6,16 +6,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Classe DAO pour les opérations CRUD sur la table Client
- */
+
 public class ClientDAO {
-    
-    /**
-     * Ajoute un nouveau client dans la base de données
-     * @param client Le client à ajouter
-     * @return true si l'ajout est réussi, false sinon
-     */
+
     public boolean ajouter(Client client) {
         String sql = "INSERT INTO client (nom, prenom, telephone) VALUES (?, ?, ?)";
         
@@ -40,12 +33,7 @@ public class ClientDAO {
         }
         return false;
     }
-    
-    /**
-     * Met à jour un client existant
-     * @param client Le client à modifier
-     * @return true si la modification est réussie, false sinon
-     */
+
     public boolean modifier(Client client) {
         String sql = "UPDATE client SET nom = ?, prenom = ?, telephone = ? WHERE id = ?";
         
@@ -63,12 +51,7 @@ public class ClientDAO {
         }
         return false;
     }
-    
-    /**
-     * Supprime un client par son ID
-     * @param id L'ID du client à supprimer
-     * @return true si la suppression est réussie, false sinon
-     */
+
     public boolean supprimer(int id) {
         String sql = "DELETE FROM client WHERE id = ?";
         
@@ -82,12 +65,7 @@ public class ClientDAO {
         }
         return false;
     }
-    
-    /**
-     * Récupère un client par son ID
-     * @param id L'ID du client
-     * @return Le client trouvé ou null
-     */
+
     public Client getById(int id) {
         String sql = "SELECT * FROM client WHERE id = ?";
         
@@ -110,11 +88,7 @@ public class ClientDAO {
         }
         return null;
     }
-    
-    /**
-     * Récupère tous les clients
-     * @return Liste de tous les clients
-     */
+
     public List<Client> getAll() {
         List<Client> clients = new ArrayList<>();
         String sql = "SELECT * FROM client ORDER BY id";

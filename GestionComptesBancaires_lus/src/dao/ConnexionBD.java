@@ -4,9 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * Classe de gestion de la connexion à la base de données MySQL
- */
 public class ConnexionBD {
     
     // Paramètres de connexion à la base de données
@@ -15,12 +12,7 @@ public class ConnexionBD {
     private static final String PASSWORD = "";
     
     private static Connection connexion = null;
-    
-    /**
-     * Obtient une connexion à la base de données
-     * @return Connection object
-     * @throws SQLException si la connexion échoue
-     */
+
     public static Connection getConnexion() throws SQLException {
         if (connexion == null || connexion.isClosed()) {
             try {
@@ -38,10 +30,7 @@ public class ConnexionBD {
         }
         return connexion;
     }
-    
-    /**
-     * Ferme la connexion à la base de données
-     */
+
     public static void fermerConnexion() {
         if (connexion != null) {
             try {

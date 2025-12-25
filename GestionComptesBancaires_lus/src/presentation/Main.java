@@ -3,9 +3,7 @@ package presentation;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-/**
- * Classe principale pour lancer l'application de gestion des comptes bancaires
- */
+
 public class Main {
     
     public static void main(String[] args) {
@@ -16,7 +14,7 @@ public class Main {
             System.err.println("Erreur lors du chargement du look and feel : " + e.getMessage());
         }
         
-        // Lancer l'interface graphique dans le thread EDT (Event Dispatch Thread)
+        // Lancer l'interface graphique dans le thread EDT
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

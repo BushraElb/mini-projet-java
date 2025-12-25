@@ -46,9 +46,7 @@ public class FormulaireCompte extends JDialog {
         }
     }
     
-    /**
-     * Initialise l'interface graphique
-     */
+
     private void initialiserInterface() {
         setSize(500, compteModifie == null ? 400 : 300);
         setLocationRelativeTo(getParent());
@@ -208,18 +206,14 @@ public class FormulaireCompte extends JDialog {
         add(panelPrincipal);
     }
     
-    /**
-     * Remplit le formulaire avec les données du compte à modifier
-     */
+
     private void remplirFormulaire(CompteBancaire compte) {
         txtRIB.setText(compte.getRIB());
         txtSolde.setText(String.valueOf(compte.getSolde()));
         checkActif.setSelected(compte.isActif());
     }
     
-    /**
-     * Valide et enregistre le formulaire
-     */
+
     private void validerFormulaire() {
         if (compteModifie == null) {
             // Mode ajout : créer un nouveau client et son compte

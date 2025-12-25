@@ -8,9 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Formulaire pour ajouter un nouveau client
- */
+
 public class FormulaireClient extends JDialog {
     
     private ITraitement traitement;
@@ -22,7 +20,6 @@ public class FormulaireClient extends JDialog {
     private JButton btnAnnuler;
     
     /**
-     * Constructeur pour créer un formulaire client
      * @param parent Le composant parent (JFrame ou JDialog)
      * @param traitement L'interface de traitement métier
      */
@@ -33,9 +30,7 @@ public class FormulaireClient extends JDialog {
         initialiserInterface();
     }
     
-    /**
-     * Initialise l'interface graphique
-     */
+
     private void initialiserInterface() {
         setSize(400, 200);
         setLocationRelativeTo(getParent());
@@ -115,9 +110,7 @@ public class FormulaireClient extends JDialog {
         add(panelPrincipal);
     }
     
-    /**
-     * Valide et enregistre le formulaire
-     */
+
     private void validerFormulaire() {
         // Validation des champs
         if (txtNom.getText().trim().isEmpty()) {
