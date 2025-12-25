@@ -39,6 +39,14 @@ public class FormulaireCompte extends JDialog {
         if (compte != null) {
             remplirFormulaire(compte);
         }
+        
+        // Recharger les clients quand la fenêtre devient visible
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowOpened(java.awt.event.WindowEvent windowEvent) {
+                chargerClients();
+            }
+        });
     }
     
     /**
@@ -79,6 +87,21 @@ public class FormulaireCompte extends JDialog {
         gbc.weightx = 1.0;
         comboClient = new JComboBox<>();
         panelChamps.add(comboClient, gbc);
+        
+        // Bouton pour rafraîchir la liste des clients
+        gbc.gridx = 2;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.weightx = 0;
+        JButton btnRafraichirClients = new JButton("🔄");
+        btnRafraichirClients.setToolTipText("Rafraîchir la liste des clients");
+        btnRafraichirClients.setPreferredSize(new Dimension(30, 25));
+        btnRafraichirClients.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                chargerClients();
+            }
+        });
+        panelChamps.add(btnRafraichirClients, gbc);
         
         // Solde
         gbc.gridx = 0;
@@ -141,10 +164,36 @@ public class FormulaireCompte extends JDialog {
      */
     private void chargerClients() {
         List<Client> clients = traitement.getClients();
+        Client selectedClient = null;
+        
+        // Sauvegarder le client sélectionné si le formulaire est en mode modification
+        if (comboClient != null && comboClient.getItemCount() > 0 && compteModifie != null) {
+            selectedClient = (Client) comboClient.getSelectedItem();
+        }
+        
         comboClient.removeAllItems();
         
-        for (Client client : clients) {
-            comboClient.addItem(client);
+        if (clients != null && !clients.isEmpty()) {
+            for (Client client : clients) {
+                comboClient.addItem(client);
+            }
+            
+            // Restaurer la sélection si en mode modification
+            if (selectedClient != null && compteModifie != null) {
+                for (int i = 0; i < comboClient.getItemCount(); i++) {
+                    Client c = comboClient.getItemAt(i);
+                    if (c.getId() == selectedClient.getId()) {
+                        comboClient.setSelectedIndex(i);
+                        break;
+                    }
+                }
+            }
+        } else {
+            // Afficher un message si aucun client n'existe
+            JOptionPane.showMessageDialog(this,
+                "Aucun client n'existe. Veuillez d'abord ajouter un client.",
+                "Aucun client",
+                JOptionPane.INFORMATION_MESSAGE);
         }
         
         // Afficher le nom et prénom dans le combo

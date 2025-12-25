@@ -140,10 +140,18 @@ public class FormulaireClient extends JDialog {
         
         traitement.ajouterClient(nouveauClient);
         
-        JOptionPane.showMessageDialog(this,
-            "Client ajouté avec succès.",
-            "Succès",
-            JOptionPane.INFORMATION_MESSAGE);
+        // Vérifier que l'ID a été assigné
+        if (nouveauClient.getId() > 0) {
+            JOptionPane.showMessageDialog(this,
+                "Client ajouté avec succès (ID: " + nouveauClient.getId() + ").",
+                "Succès",
+                JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this,
+                "Client ajouté avec succès, mais l'ID n'a pas été récupéré.",
+                "Avertissement",
+                JOptionPane.WARNING_MESSAGE);
+        }
         
         dispose();
     }
