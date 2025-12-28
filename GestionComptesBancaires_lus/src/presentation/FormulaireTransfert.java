@@ -9,9 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-/**
- * Formulaire pour effectuer un transfert entre deux comptes bancaires
- */
+
 public class FormulaireTransfert extends JDialog {
     
     private ITraitement traitement;
@@ -33,7 +31,7 @@ public class FormulaireTransfert extends JDialog {
         initialiserInterface();
         chargerComptes();
         
-        // Écouter les changements de sélection pour mettre à jour les soldes
+
         comboCompteSource.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -49,9 +47,7 @@ public class FormulaireTransfert extends JDialog {
         });
     }
     
-    /**
-     * Initialise l'interface graphique
-     */
+
     private void initialiserInterface() {
         setSize(550, 400);
         setLocationRelativeTo(getParent());
@@ -60,7 +56,7 @@ public class FormulaireTransfert extends JDialog {
         JPanel panelPrincipal = new JPanel(new BorderLayout(10, 10));
         panelPrincipal.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         
-        // Panneau des champs
+
         JPanel panelChamps = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(8, 5, 8, 5);
@@ -68,7 +64,7 @@ public class FormulaireTransfert extends JDialog {
         
         int row = 0;
         
-        // Titre
+
         gbc.gridx = 0;
         gbc.gridy = row++;
         gbc.gridwidth = 2;
@@ -78,7 +74,7 @@ public class FormulaireTransfert extends JDialog {
         panelChamps.add(titre, gbc);
         gbc.gridwidth = 1;
         
-        // Séparateur
+
         gbc.gridx = 0;
         gbc.gridy = row++;
         gbc.gridwidth = 2;
@@ -86,7 +82,7 @@ public class FormulaireTransfert extends JDialog {
         panelChamps.add(new JSeparator(), gbc);
         gbc.gridwidth = 1;
         
-        // Compte Source
+
         gbc.gridx = 0;
         gbc.gridy = row;
         gbc.fill = GridBagConstraints.NONE;
@@ -99,7 +95,7 @@ public class FormulaireTransfert extends JDialog {
         panelChamps.add(comboCompteSource, gbc);
         row++;
         
-        // Solde du compte source
+
         gbc.gridx = 0;
         gbc.gridy = row;
         gbc.fill = GridBagConstraints.NONE;
@@ -114,7 +110,7 @@ public class FormulaireTransfert extends JDialog {
         panelChamps.add(lblSoldeSource, gbc);
         row++;
         
-        // Séparateur
+
         gbc.gridx = 0;
         gbc.gridy = row++;
         gbc.gridwidth = 2;
@@ -122,7 +118,7 @@ public class FormulaireTransfert extends JDialog {
         panelChamps.add(new JSeparator(), gbc);
         gbc.gridwidth = 1;
         
-        // Compte Destination
+
         gbc.gridx = 0;
         gbc.gridy = row;
         gbc.fill = GridBagConstraints.NONE;
@@ -135,7 +131,7 @@ public class FormulaireTransfert extends JDialog {
         panelChamps.add(comboCompteDest, gbc);
         row++;
         
-        // Solde du compte destination
+
         gbc.gridx = 0;
         gbc.gridy = row;
         gbc.fill = GridBagConstraints.NONE;
@@ -149,7 +145,7 @@ public class FormulaireTransfert extends JDialog {
         panelChamps.add(lblSoldeDest, gbc);
         row++;
         
-        // Séparateur
+
         gbc.gridx = 0;
         gbc.gridy = row++;
         gbc.gridwidth = 2;
@@ -157,7 +153,7 @@ public class FormulaireTransfert extends JDialog {
         panelChamps.add(new JSeparator(), gbc);
         gbc.gridwidth = 1;
         
-        // Montant
+
         gbc.gridx = 0;
         gbc.gridy = row;
         gbc.fill = GridBagConstraints.NONE;
@@ -170,7 +166,7 @@ public class FormulaireTransfert extends JDialog {
         panelChamps.add(txtMontant, gbc);
         row++;
         
-        // Label d'aide
+
         gbc.gridx = 0;
         gbc.gridy = row;
         gbc.gridwidth = 2;
@@ -183,7 +179,7 @@ public class FormulaireTransfert extends JDialog {
         
         panelPrincipal.add(panelChamps, BorderLayout.CENTER);
         
-        // Panneau des boutons
+
         JPanel panelBoutons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         
         btnValider = new JButton("Effectuer le Transfert");
@@ -212,9 +208,7 @@ public class FormulaireTransfert extends JDialog {
         add(panelPrincipal);
     }
     
-    /**
-     * Charge la liste des comptes dans les combo boxes
-     */
+
     private void chargerComptes() {
         List<CompteBancaire> comptes = traitement.getComptes();
         comboCompteSource.removeAllItems();
@@ -252,9 +246,7 @@ public class FormulaireTransfert extends JDialog {
         mettreAJourSoldes();
     }
     
-    /**
-     * Met à jour l'affichage des soldes
-     */
+
     private void mettreAJourSoldes() {
         CompteBancaire compteSource = (CompteBancaire) comboCompteSource.getSelectedItem();
         CompteBancaire compteDest = (CompteBancaire) comboCompteDest.getSelectedItem();
@@ -272,9 +264,7 @@ public class FormulaireTransfert extends JDialog {
         }
     }
     
-    /**
-     * Valide et effectue le transfert
-     */
+
     private void validerTransfert() {
         // Validation des sélections
         CompteBancaire compteSource = (CompteBancaire) comboCompteSource.getSelectedItem();
@@ -305,7 +295,7 @@ public class FormulaireTransfert extends JDialog {
             return;
         }
         
-        // Validation du montant
+
         double montant;
         try {
             montant = Double.parseDouble(txtMontant.getText().trim());
@@ -320,7 +310,7 @@ public class FormulaireTransfert extends JDialog {
             return;
         }
         
-        // Vérifier la disponibilité du solde
+
         if (!compteSource.isActif()) {
             JOptionPane.showMessageDialog(this,
                 "Le compte source n'est pas actif. Impossible d'effectuer le transfert.",
@@ -349,7 +339,7 @@ public class FormulaireTransfert extends JDialog {
             return;
         }
         
-        // Vérifier le solde disponible
+
         if (compteSourceActuel.getSolde() < montant) {
             JOptionPane.showMessageDialog(this,
                 String.format("Solde insuffisant !\n" +
@@ -361,7 +351,7 @@ public class FormulaireTransfert extends JDialog {
             return;
         }
         
-        // Confirmation du transfert
+
         int confirmation = JOptionPane.showConfirmDialog(this,
             String.format("Confirmer le transfert ?\n\n" +
                          "De : %s (%s %s)\n" +
@@ -383,7 +373,7 @@ public class FormulaireTransfert extends JDialog {
             JOptionPane.QUESTION_MESSAGE);
         
         if (confirmation == JOptionPane.YES_OPTION) {
-            // Effectuer le transfert
+
             boolean success = traitement.transfert(compteSourceActuel, compteDestActuel, montant);
             
             if (success) {
